@@ -1,0 +1,84 @@
+#Spring Messenger Properties
+spring:
+  profiles:
+    active: dev
+  #    active: prod
+
+  application:
+    name: ${server.appName}
+
+  datasource:
+    url: jdbc:postgresql://${server.ip}:${server.db.port}/${server.db.name}?currentSchema=${server.db.schema}
+    username: ${server.db.user}
+    password: ${server.db.password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  properties:
+    hibernate:
+      default_schema: ${server.db.schema}
+  flyway:
+    url: jdbc:postgresql://${server.ip}:${server.db.port}/${server.db.name}
+    user: ${server.db.user}
+    password: ${server.db.password}
+    default-schema: ${server.db.schema}
+  instance:
+    status-page-url-path: api/messenger/actuator/info
+    health-check-url-path: api/messenger/actuator/health
+  main:
+    allow-bean-definition-overriding: true
+  mail:
+    default-encoding: UTF-8
+    host: ${server.mail.host}
+    port: 587
+    username: ${server.mail.username}
+    password: ${server.mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+#Eureka
+eureka:
+  client:
+    service-url:
+      default-zone: http://${server.ip}:8761/eureka
+  instance:
+    statusPageUrlPath: messenger/info
+    healthCheckUrlPath: messenger/health
+    instance-id: "${spring.application.name}:${spring.profiles.active}:${random.uuid}"
+    #http://localhost:8080/gateway/info/health
+
+#Logging
+logging:
+  level:
+    root: ${server.logging.level}
+  file:
+    name: ${server.logging.filePath}
+
+#Open-api
+springdoc:
+  api-docs:
+    path: /security-docs
+
+#Prometheus
+management:
+  endpoint:
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, prometheus, loggers
+      base-path: /api/messenger/info
+  metrics:
+    enable:
+      jvm: true
+
+
+

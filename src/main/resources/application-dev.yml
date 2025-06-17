@@ -1,0 +1,28 @@
+server:
+  appName: keeper-messenger-service
+  port: 8020
+  ip: localhost
+  endpoint:
+    main: api/message
+    user: api/message/user
+    data: api/message/data
+  db:
+    port: 5432
+    name: postgres
+    schema: auth
+    user: postgres
+    password: postgrespw
+  logging:
+    level: info
+    filePath: ../logs/messenger/messenger.log
+
+  mail:
+    host: smtp.gmail.com
+    username: ditartempovich76@gmail.com
+    password: Btwlifygtz15002
+
+  telegram:
+    botname: i113_assistant_bot
+    bottoken: 6130769269:AAHfY8rS5tB2kSEo0uGwoCgG6SKba797uc8
+    botrootchatid: 425222583
+

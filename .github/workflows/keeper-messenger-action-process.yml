@@ -1,0 +1,16 @@
+name: messenger-action-process
+env:
+  APPLICATION_NAME : "Keeper-Messenger"
+on: 
+  push:
+    branches: 
+      - main
+
+jobs:
+  Keeper-messenger:
+    runs-on: self-hosted
+    
+    steps:
+      - name: PrintAppData
+        run : |
+          echo "Application name2: ${{ env.APPLICATION_NAME}}"
